@@ -1,26 +1,32 @@
 import 'dart:convert';
 
 class Cidade {
-  final int id;
-  final String idUf;
+  final String id;
   final String nome;
+  final int estado;
+  Cidade({
+    required this.id,
+    required this.nome,
+    required this.estado,
+  });
 
-  Cidade({ required this.id, required this.idUf, required this.nome});
+  
 
 // gera uma cidade baseada em chave e valor
   Map<String, dynamic> toMap() {
     return {
      'id': id,
-      'id_uf': idUf,
       'nome': nome,
+      'estado': estado,
     };
   }
 
   factory Cidade.fromMap(Map<String, dynamic> map) {
     return Cidade(
-      id: int.tryParse(map['id']) ?? 0,
-      idUf: map['id_uf'] ?? '',
+      id: map['id']?? 0,
+      //id: int.tryParse(map['id']) ?? 0,
       nome: map['nome'] ?? '',
+      estado: map['municipio']['microrregiao']['mesorregiao']['UF']['id'] ?? '',
     );
   }
 // Pega a instancia e transforma no map e decodificaela para um Json
@@ -30,5 +36,5 @@ class Cidade {
   factory Cidade.fromJson(String source) => Cidade.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Cidade( id: $id, id_uf: $idUf, nome: $nome)';
+  String toString() => 'Cidade(id: $id, nome: $nome, estado: $estado)';
 }

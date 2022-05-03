@@ -9,7 +9,7 @@ class Database {
         password: 'milan1899',
         db: 'db_cities'));
 
-    await Future.delayed(Duration(milliseconds: 100));
+    //await Future.delayed(Duration(milliseconds: 100));
     return connection;
   }
 }
